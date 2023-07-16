@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS cart_db;
+USE cart_db;
