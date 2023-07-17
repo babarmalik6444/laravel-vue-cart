@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domain\User\Requests;
+namespace App\Domain\Cart\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUserRequest extends FormRequest
+class AddItemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,8 @@ class CreateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:255|min:3',
-            'email' => 'email|required|unique:users',
-            'password' => 'string|required|max:18|min:12'
+            'product_id' => 'required|integer|exits:products.id',
+            'quantity' => 'required|integer|min:1',
         ];
     }
 }

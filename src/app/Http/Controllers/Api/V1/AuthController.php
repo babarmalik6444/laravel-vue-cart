@@ -5,16 +5,12 @@ namespace App\Http\Controllers\Api\V1;
 use App\Domain\Auth\Requests\LoginRequest;
 use App\Domain\Auth\Contracts\AuthManagementInterface;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    private $authManagement;
-
-    public function __construct(AuthManagementInterface $authManagement)
-    {
-        $this->authManagement = $authManagement;
-    }
+    public function __construct(
+        private AuthManagementInterface $authManagement
+    ) {}
 
     final public function login(LoginRequest $request)
     {

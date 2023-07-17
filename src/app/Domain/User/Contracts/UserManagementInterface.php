@@ -4,5 +4,5 @@ namespace App\Domain\User\Contracts;
 
 interface UserManagementInterface
 {
-    public function registerUser($name, $email, $password);
+    public function registerUser(string $name, string $email, string $password);
 }

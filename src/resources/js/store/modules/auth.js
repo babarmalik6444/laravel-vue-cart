@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { getCartItemsHelper } from "../../helpers/cart_helper.js"
 
 const state = {
     user: null,
@@ -46,7 +47,7 @@ const actions = {
             return Promise.reject(message);
         }
     },
-    async login({ commit }, userData) {
+    async login({ commit, rootState }, userData) {
         try {
             const response = await axios.post('/api/login', userData);
             const user = response.data.user;
@@ -60,6 +61,9 @@ const actions = {
             commit('SET_USER', user);
             commit('CLEAR_MESSAGES');
             commit('SET_SUCCESS_MESSAGE', 'Login successful!');
+            //get cart elements for logged in user
+            const products = await getCartItemsHelper(user);
+            rootState.cart.cartItems = products;
             return Promise.resolve();
         } catch (error) {
             const message = error.response && error.response.data.message ? error.response.data.message : 'Login failed.';
@@ -75,7 +79,6 @@ const actions = {
                     Authorization: `Bearer ${state.user.token}`,
                 },
             };
-            console.log(config);
             await axios.post('/api/logout', null, config);
 
             Cookies.remove('authToken');

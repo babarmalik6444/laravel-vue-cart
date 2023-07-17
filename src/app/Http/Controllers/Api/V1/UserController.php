@@ -8,12 +8,9 @@ use App\Domain\User\Requests\CreateUserRequest;
 
 class UserController extends Controller
 {
-    private $userManagement;
-
-    public function __construct(UserManagementInterface $userManagement)
-    {
-        $this->userManagement = $userManagement;
-    }
+    public function __construct(
+        private UserManagementInterface $userManagement
+    ) {}
 
     public function store(CreateUserRequest $request)
     {

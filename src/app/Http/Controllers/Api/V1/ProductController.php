@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
 use App\Domain\Product\Contracts\ProductManagementInterface;
+use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-    private $productService;
-
-    public function __construct(ProductManagementInterface $productService)
-    {
-        $this->productService = $productService;
+    public function __construct(
+        private ProductManagementInterface $productService
+    ) {
     }
 
     public function index()

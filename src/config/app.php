@@ -5,6 +5,8 @@ use Illuminate\Support\ServiceProvider;
 
 return [
 
+    'Hash' => Illuminate\Support\Facades\Hash::class,
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

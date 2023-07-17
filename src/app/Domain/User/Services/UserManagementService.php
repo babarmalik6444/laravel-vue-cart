@@ -7,7 +7,7 @@ use App\Domain\User\Models\User;
 
 class UserManagementService implements UserManagementInterface
 {
-    public function registerUser($name, $email, $password): User
+    public function registerUser(string $name, string $email, string $password): User
     {
         $user = User::create([
             'name' => $name,

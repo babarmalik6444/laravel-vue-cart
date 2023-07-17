@@ -3,26 +3,25 @@
 namespace App\Domain\Auth\Services;
 
 use App\Domain\Auth\Contracts\AuthManagementInterface;
-use Carbon\Carbon;
+use App\Domain\User\Models\User;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService implements AuthManagementInterface
 {
-    public function login($email, $password, $remember)
+    public function login(string $email, string $password, bool $remember): User
     {
-        // Calculate the expiration time for the remember token (2 weeks from now)
-        $rememberExpiry = $remember ? Carbon::now()->addWeeks(2) : null;
-        if (Auth::attempt(['email' => $email, 'password' => $password], $remember, $rememberExpiry)) {
+        if (Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
             $user = Auth::user();
             $token = $user->createToken('AuthToken')->plainTextToken;
             $user->token = $token;
             return $user;
         }
 
-        return null; // Authentication failed
+        throw new AuthenticationException();
     }
 
-    public function logout()
+    public function logout(): void
     {
         Auth::user()->currentAccessToken()->delete();
     }

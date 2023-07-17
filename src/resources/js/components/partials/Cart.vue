@@ -45,16 +45,15 @@ export default {
     },
     methods: {
         updateQuantity(item) {
-            this.$store.commit('updateCartItem', {
+            this.$store.dispatch('updateCartItem', {
                 productId: item.id,
-                quantity: item.quantity
+                quantity: item.quantity,
             });
         },
         removeItem(productId) {
-            this.$store.commit('removeFromCart', productId);
+            this.$store.dispatch('removeFromCart', productId);
         },
         closeCart() {
-            // Emit an event to notify the parent component
             this.$emit('close');
         }
     }

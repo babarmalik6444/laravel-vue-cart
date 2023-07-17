@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\ProductController;
+use App\Http\Controllers\Api\V1\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,12 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::post('/logout', 'logout');
+    });
+
+    Route::controller(CartController::class)->group(function () {
+        Route::post('/cart/add', 'addToCart');
+        Route::delete('/cart/{productId}', 'removeFromCart');
+        Route::get('/cart', 'getCartItems');
     });
 });
 

@@ -13,7 +13,7 @@ const store = createStore({
         auth,
         cart
     },
-    plugins: [createPersistedState()]
+    plugins: [persistedState]
 });
 
 // Check if the auth token and user information exist in cookies on page load

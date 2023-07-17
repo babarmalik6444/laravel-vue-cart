@@ -12,6 +12,9 @@ use App\Domain\Product\Services\ProductService;
 use App\Domain\Auth\Contracts\AuthManagementInterface;
 use App\Domain\Auth\Services\AuthService;
 
+use App\Domain\Cart\Contracts\CartManagementInterface;
+use App\Domain\Cart\Services\CartService;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -22,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserManagementInterface::class, UserManagementService::class);
         $this->app->bind(ProductManagementInterface::class, ProductService::class);
         $this->app->bind(AuthManagementInterface::class, AuthService::class);
+        $this->app->bind(CartManagementInterface::class, CartService::class);
     }
 
     /**
